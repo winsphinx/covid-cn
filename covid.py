@@ -4,7 +4,7 @@
 import codecs
 import os
 import re
-from concurrent.futures.thread import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor
 
 import matplotlib.pyplot as plt
 import pandas as pd
