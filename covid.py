@@ -107,7 +107,7 @@ def draw_(province, isDaily):
 if __name__ == "__main__":
     # 准备数据
     df = pd.read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv", index_col="Province/State").drop(columns=["Lat", "Long"])
-    df = df[(df["Country/Region"] == "China") | (df["Country/Region"] == "Taiwan*")].transpose().drop("Country/Region").rename(columns=str).rename(columns={"nan": "Taiwan"})
+    df = df[(df["Country/Region"] == "China") | (df["Country/Region"] == "Taiwan*")].transpose().drop("Country/Region").rename(columns=str).rename(columns={"nan": "Taiwan"}).drop(columns=["Unknown"])
     df.index = pd.DatetimeIndex(df.index.map(adjust_date))
 
     provinces = df.columns.to_list()
