@@ -66,7 +66,25 @@ def draw(province):
 
 def draw_(province, isDaily):
     # 模型训练
-    model = arima.AutoARIMA(start_p=0, max_p=4, d=None, start_q=0, max_q=1, start_P=0, max_P=1, D=None, start_Q=0, max_Q=1, m=7, seasonal=True, test="kpss", trace=True, error_action="ignore", suppress_warnings=True, stepwise=True)
+    model = arima.AutoARIMA(
+        start_p=0,
+        max_p=4,
+        d=None,
+        start_q=0,
+        max_q=1,
+        start_P=0,
+        max_P=1,
+        D=None,
+        start_Q=0,
+        max_Q=1,
+        m=7,
+        seasonal=True,
+        test="kpss",
+        trace=True,
+        error_action="ignore",
+        suppress_warnings=True,
+        stepwise=True,
+    )
     if isDaily:
         data = df[province].diff().dropna()
         model.fit(data)
@@ -94,20 +112,39 @@ def draw_(province, isDaily):
     # plt.fill_between(forecasting.index, pred_ci[:, 0], pred_ci[:, 1], color="black", alpha=.25)
 
     plt.legend()
-    plt.ticklabel_format(style='plain', axis='y')
+    plt.ticklabel_format(style="plain", axis="y")
     plt.rcParams["font.sans-serif"] = ["Microsoft YaHei"]
     if isDaily:
-        plt.title(f"每日新增预测 - {province_name[province]}\nARIMA {model.model_.order}x{model.model_.seasonal_order} (R2 = {r2:.6f})")
-        plt.savefig(os.path.join("figures", f"{adjust_name(province)}-daily.svg"), bbox_inches="tight")
+        plt.title(
+            f"每日新增预测 - {province_name[province]}\nARIMA {model.model_.order}x{model.model_.seasonal_order} (R2 = {r2:.6f})"
+        )
+        plt.savefig(
+            os.path.join("figures", f"{adjust_name(province)}-daily.svg"),
+            bbox_inches="tight",
+        )
     else:
-        plt.title(f"累计确诊预测 - {province_name[province]}\nARIMA {model.model_.order}x{model.model_.seasonal_order} (R2 = {r2:.6f})")
-        plt.savefig(os.path.join("figures", f"{adjust_name(province)}.svg"), bbox_inches="tight")
+        plt.title(
+            f"累计确诊预测 - {province_name[province]}\nARIMA {model.model_.order}x{model.model_.seasonal_order} (R2 = {r2:.6f})"
+        )
+        plt.savefig(
+            os.path.join("figures", f"{adjust_name(province)}.svg"), bbox_inches="tight"
+        )
 
 
 if __name__ == "__main__":
     # 准备数据
-    df = pd.read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv", index_col="Province/State").drop(columns=["Lat", "Long"])
-    df = df[(df["Country/Region"] == "China") | (df["Country/Region"] == "Taiwan*")].transpose().drop("Country/Region").rename(columns=str).rename(columns={"nan": "Taiwan"}).drop(columns=["Unknown"])
+    df = pd.read_csv(
+        "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",
+        index_col="Province/State",
+    ).drop(columns=["Lat", "Long"])
+    df = (
+        df[(df["Country/Region"] == "China") | (df["Country/Region"] == "Taiwan*")]
+        .transpose()
+        .drop("Country/Region")
+        .rename(columns=str)
+        .rename(columns={"nan": "Taiwan"})
+        .drop(columns=["Unknown"])
+    )
     df.index = pd.DatetimeIndex(df.index.map(adjust_date))
 
     provinces = df.columns.to_list()
@@ -117,11 +154,15 @@ if __name__ == "__main__":
         pool.map(draw, provinces)
 
     # 编制索引
-    with codecs.open("README.md", "w", 'utf-8') as f:
-        f.write("[![check status](https://github.com/winsphinx/covid-cn/actions/workflows/check.yml/badge.svg)](https://github.com/winsphinx/covid-cn/actions/workflows/check.yml)\n")
-        f.write("[![build status](https://github.com/winsphinx/covid-cn/actions/workflows/build.yml/badge.svg)](https://github.com/winsphinx/covid-cn/actions/workflows/build.yml)\n")
+    with codecs.open("README.md", "w", "utf-8") as f:
+        f.write(
+            "[![check status](https://github.com/winsphinx/covid-cn/actions/workflows/check.yml/badge.svg)](https://github.com/winsphinx/covid-cn/actions/workflows/check.yml)\n"
+        )
+        f.write(
+            "[![build status](https://github.com/winsphinx/covid-cn/actions/workflows/build.yml/badge.svg)](https://github.com/winsphinx/covid-cn/actions/workflows/build.yml)\n"
+        )
         f.write("# COVID-19 Forecasting\n\n")
         for province in provinces:
-            f.write(f"## {province_name[province]}\n\n")
+            f.write(f"## {province_name.get(province, province)}\n\n")
             f.write(f"![img](figures/{adjust_name(province)}.svg)\n\n")
             f.write(f"![img](figures/{adjust_name(province)}-daily.svg)\n\n")
