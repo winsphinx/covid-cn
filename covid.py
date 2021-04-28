@@ -144,6 +144,7 @@ if __name__ == "__main__":
         .rename(columns=str)
         .rename(columns={"nan": "Taiwan"})
         .drop(columns=["Unknown"])
+        .sort_index(axis=1)
     )
     df.index = pd.DatetimeIndex(df.index.map(adjust_date))
 
