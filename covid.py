@@ -153,6 +153,7 @@ if __name__ == "__main__":
     # 线程池
     with ThreadPoolExecutor(max_workers=16) as pool:
         pool.map(draw, provinces)
+    pool.shutdown(wait=True)
 
     # 编制索引
     with codecs.open("README.md", "w", "utf-8") as f:
