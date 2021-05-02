@@ -9,7 +9,7 @@ on:
 jobs:
   build:
 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Set up Git repository
@@ -20,6 +20,8 @@ jobs:
 
     - name: Create local files
       run: |
+        sudo apt update
+        sudo apt install fonts-wqy-zenhei
         python -m pip install --upgrade pip
         pip install -U matplotlib pandas pmdarima scikit_learn
         python covid.py
