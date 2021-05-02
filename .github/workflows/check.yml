@@ -10,7 +10,7 @@ on:
 jobs:
   check:
 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Set up Git repository
