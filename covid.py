@@ -151,7 +151,7 @@ if __name__ == "__main__":
     provinces = df.columns.to_list()
 
     # 线程池
-    with ThreadPoolExecutor(max_workers=16) as pool:
+    with ThreadPoolExecutor() as pool:
         pool.map(draw, provinces)
     pool.shutdown(wait=True)
 
