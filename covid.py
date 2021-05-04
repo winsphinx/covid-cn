@@ -4,7 +4,7 @@
 import codecs
 import os
 import re
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ProcessPoolExecutor
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -151,7 +151,7 @@ if __name__ == "__main__":
     provinces = df.columns.to_list()
 
     # 线程池
-    with ThreadPoolExecutor() as pool:
+    with ProcessPoolExecutor() as pool:
         pool.map(draw, provinces)
     pool.shutdown(wait=True)
 
