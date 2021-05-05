@@ -122,6 +122,7 @@ def draw_(province, isDaily):
             os.path.join("figures", f"{adjust_name(province)}-daily.svg"),
             bbox_inches="tight",
         )
+        plt.close()
     else:
         plt.title(
             f"累计确诊预测 - {province_name[province]}\nARIMA {model.model_.order}x{model.model_.seasonal_order} (R2 = {r2:.6f})"
@@ -129,6 +130,7 @@ def draw_(province, isDaily):
         plt.savefig(
             os.path.join("figures", f"{adjust_name(province)}.svg"), bbox_inches="tight"
         )
+        plt.close()
 
 
 if __name__ == "__main__":
