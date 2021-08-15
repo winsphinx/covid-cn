@@ -1,3 +1,3 @@
-[![check status](https://github.com/winsphinx/covid-cn/actions/workflows/check.yml/badge.svg)](https://github.com/winsphinx/covid-cn/actions/workflows/check.yml)
-[![build status](https://github.com/winsphinx/covid-cn/actions/workflows/build.yml/badge.svg)](https://github.com/winsphinx/covid-cn/actions/workflows/build.yml)
-[![Data From](https://img.shields.io/badge/Data%20From-https://github.com/CSSEGISandData/COVID--19-brightgreen)](https://github.com/CSSEGISandData/COVID-19)
+[![Check Status](https://github.com/winsphinx/covid-cn/actions/workflows/check.yml/badge.svg)](https://github.com/winsphinx/covid-cn/actions/workflows/check.yml)
+[![Build Status](https://github.com/winsphinx/covid-cn/actions/workflows/build.yml/badge.svg)](https://github.com/winsphinx/covid-cn/actions/workflows/build.yml)
+[![Data Source](https://img.shields.io/badge/Data%20Source-https://github.com/CSSEGISandData/COVID--19-brightgreen)](https://github.com/CSSEGISandData/COVID-19)
