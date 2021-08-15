@@ -1,4 +1,4 @@
-name: check status
+name: Check Status
 
 on:
   push:
