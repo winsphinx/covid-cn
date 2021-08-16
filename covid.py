@@ -159,16 +159,16 @@ if __name__ == "__main__":
 
     # 编制索引
     with codecs.open("README.md", "w", "utf-8") as f:
-        f.write(
-            "[![Check Status](https://github.com/winsphinx/covid-cn/actions/workflows/check.yml/badge.svg)](https://github.com/winsphinx/covid-cn/actions/workflows/check.yml)\n"
-        )
+        f.write("# COVID-19 Forecasting\n\n")
         f.write(
             "[![Build Status](https://github.com/winsphinx/covid-cn/actions/workflows/build.yml/badge.svg)](https://github.com/winsphinx/covid-cn/actions/workflows/build.yml)\n"
         )
         f.write(
+            "[![Check Status](https://github.com/winsphinx/covid-cn/actions/workflows/check.yml/badge.svg)](https://github.com/winsphinx/covid-cn/actions/workflows/check.yml)\n"
+        )
+        f.write(
             "[![Data Source](https://img.shields.io/badge/Data%20Source-https://github.com/CSSEGISandData/COVID--19-brightgreen)](https://github.com/CSSEGISandData/COVID-19)\n"
         )
-        f.write("# COVID-19 Forecasting\n\n")
         for province in provinces:
             f.write(f"## {province_name.get(province, province)}\n\n")
             f.write(f"![img](figures/{adjust_name(province)}.svg)\n\n")
