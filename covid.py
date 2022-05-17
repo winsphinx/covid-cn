@@ -56,7 +56,7 @@ def adjust_date(s):
 
 
 def adjust_name(s):
-    return re.sub(r"\*|\,|\(|\)|\*|\ |\'", "_", s)
+    return re.sub(r"\*|\,|\(|\)|\ |\'", "_", s)
 
 
 def draw(province):
