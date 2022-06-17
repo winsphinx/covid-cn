@@ -94,13 +94,13 @@ def draw_(province, isDaily):
 
     # 模型验证
     train, test = train_test_split(data, train_size=0.8)
-    pred_test = model.predict_in_sample(start=train.shape[0], dynamic=False)
+    pred_test = model.predict_in_sample(start=train.shape[0] + 1, end=data.shape[0], dynamic=False)
     validating = pd.Series(pred_test, index=test.index)
     r2 = r2_score(test, pred_test)
 
     # 开始预测
     pred, pred_ci = model.predict(n_periods=14, return_conf_int=True)
-    idx = pd.date_range(data.index.max() + pd.Timedelta("1D"), periods=14, freq="D")
+    idx = pd.date_range(data.index.max(), periods=14, freq="D")
     forecasting = pd.Series(pred, index=idx)
 
     # 绘图呈现
