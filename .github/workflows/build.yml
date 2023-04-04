@@ -3,7 +3,9 @@ name: Build Status
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 18 * * *"
+    - cron: "0 18 * * 0"
+  watch:
+    types: started
 
 
 jobs:
@@ -50,4 +52,4 @@ jobs:
         token: ${{ github.token }}
         repository: ${{ github.repository }}
         retain_days: 30
-        keep_minimum_runs: 6
+        keep_minimum_runs: 0
